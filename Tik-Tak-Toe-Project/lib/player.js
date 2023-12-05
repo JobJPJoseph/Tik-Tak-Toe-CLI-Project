@@ -8,7 +8,7 @@ class Player {
     }
 
     validateCoordinates(input) {
-        if (input.length > 3 || input.length < 3) return false;
+        if (input.length !== 3) return false;
         if (this.countSpaces(input) !== 1) return false;
         return this.formatInput(input);
 
@@ -18,21 +18,19 @@ class Player {
     countSpaces(input) {
         let count = 0;
 
-        input.split("").forEach(function(elem) {
-            if (elem === " ") count++;
-        });
+        for (let i = 0; i < input.length; i++) {
+            const isSpace = input[i];
+
+            if (isSpace === " ") count++;
+        }
 
         return count;
     }
 
     formatInput(input) {
-        input.split(" ").map(function(elem) {
-            if (elem !== " ") {
-                return Number(elem);
-            } else {
-                return elem;
-            }
-        })
+        return input.split(" ").map(function(elem) {
+            return Number(elem);
+        });
     }
 
 }
