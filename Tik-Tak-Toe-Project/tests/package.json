@@ -4,7 +4,7 @@
   "description": "",
   "main": "player.spec.js",
   "scripts": {
-    "test": "mocha ./player.spec.js"
+    "test": "mocha ./cpu.spec.js"
   },
   "keywords": [],
   "author": "",
