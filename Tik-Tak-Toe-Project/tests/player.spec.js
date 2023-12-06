@@ -32,15 +32,18 @@ describe('Player', function () {
 
     });
 
-    describe('Get Coordinates', function () {
-        it("the user's corrdinates should be included i within availablePositions.", function () {
+    describe('Validate Coordinates', function () {
+        it("the user's coordinates should be included i within availableCoordinates.", function () {
             const player = new Player();
-            const input = [
+            const availableCoordinates = [
                 [0,0], [0,1], [0,2],
                 [1,0], [1,1], [1,2],
                 [2,0], [2,1], [2,2],
             ];
-            const result = player.getCoordinate(input);
+            const result = !player.validateCoordinates(availableCoordinates, [3,0]);
+            expect(result).to.equal(true)
+            const result1 = !player.validateCoordinates(availableCoordinates, [2,0]);
+            expect(result1).to.equal(false)
         });
     })
 
