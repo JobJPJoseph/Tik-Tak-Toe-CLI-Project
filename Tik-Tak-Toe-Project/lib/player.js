@@ -4,28 +4,35 @@ class Player {
     }
 
     getCoordinate(availablePositions) {
-        const rl = this.readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
+        return new Promise((resolve) => {
+            const rl = this.readline.createInterface({
+                input: process.stdin,
+                output: process.stdout
+            });
+
+            const isInputIncluded = () => {
+
+                rl.question("Enter your coordinate in this form: '0 0': ", (input) => {
+                    const arrInput = this.formatCoordinates(input);
+
+                    if (!arrInput) {
+                        console.log('1: Enter a valid coordinate.');
+                        return isInputIncluded();
+                    } else if (!(this.validateCoordinates(availablePositions, arrInput))) {
+                        console.log('2: Enter a valid coordinate.');
+                        return isInputIncluded();
+                    } else {
+                        rl.close();
+                        resolve(arrInput);
+                    }
+
+                });
+
+            }
+
+            isInputIncluded();
         });
 
-        const isInputIncluded = () => {
-            rl.question("Enter your coordinate in this form: '0 0': ", (input) => {
-                const arrInput = this.formatCoordinates(input);
-                if (!arrInput) {
-                    console.log('1: Enter a valid coordinate.');
-                    return isInputIncluded();
-                } else if (!(this.validateCoordinates(availablePositions, arrInput))) {
-                    console.log('2: Enter a valid coordinate.');
-                    return isInputIncluded();
-                } else {
-                    rl.close(); // may cause issues
-                    return input;
-                }
-            });
-        }
-
-        return isInputIncluded(); // This is a logical error
     }
 
     validateCoordinates(availablePositions, input) {
