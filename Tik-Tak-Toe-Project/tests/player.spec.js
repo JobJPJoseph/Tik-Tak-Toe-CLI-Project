@@ -4,10 +4,11 @@ const expect = require('chai').expect;
 
 
 const Player = require('../lib/player');
+// const { resolve } = require('path');
 
 describe('Player', function () {
 
-    describe('Validate Coordinates', function() {
+    describe('Format Coordinates', function() {
 
         it("it should check if the user's coordinate is in a valid length", function () {
             const player = new Player();
@@ -33,7 +34,8 @@ describe('Player', function () {
     });
 
     describe('Validate Coordinates', function () {
-        it("the user's coordinates should be included i within availableCoordinates.", function () {
+
+        it("the user's coordinates should be included in within availableCoordinates.", function () {
             const player = new Player();
             const availableCoordinates = [
                 [0,0], [0,1], [0,2],
@@ -45,6 +47,25 @@ describe('Player', function () {
             const result1 = !player.validateCoordinates(availableCoordinates, [2,0]);
             expect(result1).to.equal(false)
         });
-    })
+
+    });
+
+    describe("Get player's inputs", () => {
+
+        it("Should validate and sheck for inclusion of user's input in available inputs.", async () => {
+            const player = new Player(readline);
+            const availableCoordinates = [
+                [0,0], [0,1], [0,2],
+                [1,0], [1,1], [1,2],
+                [2,0], [2,1], [2,2],
+            ];
+
+
+
+            const input = await player.getCoordinate(availableCoordinates);
+            expect(input).to.deep.equal([0, 0]); // Use deep.equal for array comparison
+        }, 10000);
+
+    });
 
 });
