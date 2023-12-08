@@ -17,3 +17,15 @@ Our next task is to create a `Board` class. This will handle most of the tasks f
 Our first task for this class is to create a constructor that will accept two arguments. The arguments represent an instance from the `player` class and the `Cpu` class.
 Note: We can just use `extends`.
 We need to initialize a instance variable called `this.grid` which is an empty array. The grid needs tp be a 2-D Array 3-by-3 where each default value is a dash `"-"`.
+
+### Phase 3-2
+Next we need to print out the `this.grid` instance in a way to replicate a tik-tak-toe baord.
+
+```
+    - | - | -
+    ---------
+    - | - | -
+    ---------
+    - | - | -
+```
+### Phase 3-3
