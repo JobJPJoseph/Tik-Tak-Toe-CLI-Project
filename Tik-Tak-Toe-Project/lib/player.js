@@ -1,6 +1,7 @@
 class Player {
     constructor(readline = null) {
         this.readline = readline;
+        this.symbol = "X";
     }
 
     getCoordinate(availablePositions) {

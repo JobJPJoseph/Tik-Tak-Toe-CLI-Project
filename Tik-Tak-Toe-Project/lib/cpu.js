@@ -1,6 +1,7 @@
 class Cpu {
     constructor(readline = null) {
         this.readline = readline;
+        this.symbol = "O";
     }
 
     getCoordinate(availableCoordinate) {
