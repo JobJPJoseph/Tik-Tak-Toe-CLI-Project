@@ -29,8 +29,8 @@ class Board {
         return this.grid[input[0]][input[1]]; // return a symbol or dash
     }
 
-    setCoordinate(input) {
-        this.grid[input[0]][input[1]] = input.symbol;
+    setCoordinate(input, player) {
+        this.grid[input[0]][input[1]] = player.symbol;
         return true;
     }
 
@@ -53,5 +53,6 @@ class Board {
 
         return collected;
     }
+
 
 }
