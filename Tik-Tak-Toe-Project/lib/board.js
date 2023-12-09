@@ -54,5 +54,102 @@ class Board {
         return collected;
     }
 
+    stateOfGame() {
+        if (this.isLose()) return console.log(`You Lose!!!`);
+        if (this.isWin()) return console.log(`You Win!!!`);
+        return false;
+    }
 
+    isLose() {
+        const isStreak = [
+            this.horizontalStreak(this.cpu.symbol),
+            this.diagonalStreak(this.cpu.symbol),
+            this.acrossTopLeft(this.cpu.symbol),
+            this.acrossBottomLeft(this.cpu.symbol)
+        ];
+
+        return isStreak.some((streak) => streak === true);
+    }
+
+    isWin() {
+        const isStreak = [
+            this.horizontalStreak(this.player.symbol),
+            this.diagonalStreak(this.player.symbol),
+            this.acrossTopLeft(this.player.symbol),
+            this.acrossBottomLeft(this.player.symbol)
+        ];
+
+        return isStreak.some((streak) => streak === true);
+    }
+
+    horizontalStreak(character) {
+
+        for (let row = 0; row < this.grid.length; row++) {
+            const checkForStreak = [];
+
+            for (let col = 0; col < this.length; col++) {
+                checkForStreak.push(this.getCoordinate([row, col]));
+            }
+
+            if (checkForStreak.length === this.grid.length) {
+                const result = checkForStreak.every((symbol) => symbol === character);
+                if (result) return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    diagonalStreak(character) {
+
+        for (let row = 0; row < this.grid.length; row++) {
+            const checkForStreak = [];
+
+            for (let col = 0; col < this.grid.length; col++) {
+                checkForStreak.push(this.getCoordinate([col, row]));
+            }
+
+            if (checkForStreak.length === this.grid.length) {
+                const result = checkForStreak.every((symbol) => symbol === character);
+                if (result) return true;
+            }
+        }
+
+        return false;
+    }
+
+    acrossTopLeft(character) {
+        let row = 0;
+        let col = 0;
+
+        const checkForStreak = [];
+
+        while(row < this.grid.length && col < this.grid[row].length) {
+            checkForStreak.push(this.getCoordinate([row, col]));
+
+            row++;
+            col++;
+        }
+
+        return checkForStreak.every((symbol) => symbol === character);
+    }
+
+    acrossBottomLeft(character) {
+        let row = this.grid.length - 1;
+        let col = 0;
+
+        const checkForStreak = [];
+
+        while(row >= 0 && col < this.grid[row].length) {
+            checkForStreak.push(this.getCoordinate([row, col]));
+
+            row--;
+            col++;
+        }
+
+        return checkForStreak.every((symbol) => symbol === character);
+    }
+
+    run() {}
 }

@@ -27,3 +27,12 @@ The purpose of this is to return a boolean. It is to confirm that if the input g
 
 ## Phase 6
 Create a method called `collectCoordinate`. It will iterate through `this.grid` and call `isValid`. If true, will push the coordinates into an empty array. Once done will return that array.
+
+## Phase 7
+Create a method called `stateOfGame`. The purpose of this method is to call `isLose` and `isWin`. If `isWin` is true, then return`console.log("You Win!!!")`. If lose, then return `console.log("You Lose!!!")`
+
+## Phase 8
+Create a method called `isLose`. The purpose of this method is to see if `horizontalStreak`, `diagonalStreak`, `acrossTopLeft`, `acrossBottomLeft` have streak of `this.cpu.symbol`. If any them returns true, return true, otherwise return false.
+
+## Phase 9
+Create a method
