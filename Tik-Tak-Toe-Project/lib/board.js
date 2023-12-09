@@ -88,7 +88,7 @@ class Board {
         for (let row = 0; row < this.grid.length; row++) {
             const checkForStreak = [];
 
-            for (let col = 0; col < this.length; col++) {
+            for (let col = 0; col < this.grid.length; col++) {
                 checkForStreak.push(this.getCoordinate([row, col]));
             }
 
@@ -102,7 +102,7 @@ class Board {
         return false;
     }
 
-    diagonalStreak(character) {
+    verticalStreak(character) {
 
         for (let row = 0; row < this.grid.length; row++) {
             const checkForStreak = [];
@@ -115,6 +115,7 @@ class Board {
                 const result = checkForStreak.every((symbol) => symbol === character);
                 if (result) return true;
             }
+
         }
 
         return false;
