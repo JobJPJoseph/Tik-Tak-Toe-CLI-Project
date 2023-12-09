@@ -1,6 +1,7 @@
 const Board = require('../lib/board');
 const Cpu = require('../lib/cpu');
 const Player = require('../lib/player');
+const sinon = require('sinon');
 
 const expect = require('chai').expect;
 
@@ -258,6 +259,125 @@ describe('Board class', function () {
 
             // Expect false for no diagonal streak
             expect(noDiagonalStreak).to.be.false;
+        });
+    });
+
+    describe('rotateTurn', function () {
+        it('should rotate the turn array, swapping player and CPU turns', function () {
+            const player = new Player();
+            const cpu = new Cpu();
+            const board = new Board(player, cpu);
+
+            // Initially, the turn array should be [player, cpu]
+            expect(board.turn).to.deep.equal([player, cpu]);
+
+            // Call rotateTurn
+            board.rotateTurn();
+
+            // After rotating, the turn array should be [cpu, player]
+            expect(board.turn).to.deep.equal([cpu, player]);
+        });
+    });
+
+    describe('isLose', function () {
+        it('should return true if the CPU has a winning streak and false otherwise', function () {
+            const player = new Player();
+            const cpu = new Cpu();
+            const board = new Board(player, cpu);
+
+            // Assuming you have a setCoordinate method in your Board class
+            board.setCoordinate([0, 0], cpu);
+            board.setCoordinate([0, 1], cpu);
+            board.setCoordinate([0, 2], cpu);
+
+            // Check for a winning streak for CPU
+            const isCpuLose = board.isLose();
+
+            // Expect true for a CPU winning streak
+            expect(isCpuLose).to.be.true;
+
+            // Reset the board
+            board.setCoordinate([0, 0], "-");
+            board.setCoordinate([0, 1], "-");
+            board.setCoordinate([0, 2], "-");
+
+            // Check for no winning streak for CPU
+            const isCpuNotLose = board.isLose();
+
+            // Expect false for no CPU winning streak
+            expect(isCpuNotLose).to.be.false;
+        });
+    });
+
+    describe('isWin', function () {
+        it('should return true if the player has a winning streak and false otherwise', function () {
+            const player = new Player();
+            const cpu = new Cpu();
+            const board = new Board(player, cpu);
+
+            // Assuming you have a setCoordinate method in your Board class
+            board.setCoordinate([0, 0], player);
+            board.setCoordinate([0, 1], player);
+            board.setCoordinate([0, 2], player);
+
+            // Check for a winning streak for the player
+            const isPlayerWin = board.isWin();
+
+            // Expect true for a player winning streak
+            expect(isPlayerWin).to.be.true;
+
+            // Reset the board
+            board.setCoordinate([0, 0], "-");
+            board.setCoordinate([0, 1], "-");
+            board.setCoordinate([0, 2], "-");
+
+            // Check for no winning streak for the player
+            const isPlayerNotWin = board.isWin();
+
+            // Expect false for no player winning streak
+            expect(isPlayerNotWin).to.be.false;
+        });
+    });
+
+    describe('stateOfGame', function () {
+        it('should print the correct message when the game is won, lost, or ongoing', function () {
+            const player = new Player();
+            const cpu = new Cpu();
+            const board = new Board(player, cpu);
+
+            // Assuming you have a setCoordinate method in your Board class
+            board.setCoordinate([0, 0], player);
+            board.setCoordinate([0, 1], player);
+            board.setCoordinate([0, 2], player);
+
+            // Check for a winning streak for the player
+            const isPlayerWin = board.isWin();
+
+            // Set up a spy to capture console.log output
+            const consoleSpy = sinon.spy(console, 'log');
+
+            // Call stateOfGame
+            board.stateOfGame();
+
+            // Expect the correct message for a player win
+            expect(consoleSpy.calledOnceWith('You Win!!!')).to.be.true;
+
+            // Reset the board
+            board.setCoordinate([0, 0], "-");
+            board.setCoordinate([0, 1], "-");
+            board.setCoordinate([0, 2], "-");
+
+            // Check for no winning streak for the player
+            const isPlayerNotWin = board.isWin();
+
+            // Call stateOfGame
+            board.stateOfGame();
+
+            // Expect no additional console.log calls for a game still ongoing
+            expect(consoleSpy.calledOnce).to.be.true;
+
+            // Reset the spy
+            consoleSpy.restore();
         });
     });
 })
