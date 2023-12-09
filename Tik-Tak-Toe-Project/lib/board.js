@@ -64,7 +64,7 @@ class Board {
     isLose() {
         const isStreak = [
             this.horizontalStreak(this.cpu.symbol),
-            this.diagonalStreak(this.cpu.symbol),
+            this.verticalStreak(this.cpu.symbol),
             this.acrossTopLeft(this.cpu.symbol),
             this.acrossBottomLeft(this.cpu.symbol)
         ];
@@ -75,7 +75,7 @@ class Board {
     isWin() {
         const isStreak = [
             this.horizontalStreak(this.player.symbol),
-            this.diagonalStreak(this.player.symbol),
+            this.verticalStreak(this.player.symbol),
             this.acrossTopLeft(this.player.symbol),
             this.acrossBottomLeft(this.player.symbol)
         ];
