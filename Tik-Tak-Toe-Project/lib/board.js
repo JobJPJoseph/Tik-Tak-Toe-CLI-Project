@@ -3,6 +3,7 @@ class Board {
     constructor(player = null, cpu = null) {
         this.player = player; // An instance
         this.cpu = cpu; // An instance
+        this.turn = [this.player, this.cpu];
         this.grid = [];
 
         for (let i = 0; i < 3; i++) {
@@ -12,13 +13,13 @@ class Board {
                 row.push("-");
             }
 
-            grid.push(row);
+            this.grid.push(row);
         }
 
     }
 
     print() {
-        const printGrid = grid.map(function (row) {
+        const printGrid = this.grid.map(function (row) {
             return row.join(" | ");
         }).join("\n" + "----------" + "\n");
 
@@ -151,5 +152,13 @@ class Board {
         return checkForStreak.every((symbol) => symbol === character);
     }
 
+    rotateTurn() {
+        [this.turn[1], this.turn[0]] = [this.turn[0], this.turn[1]];
+        return true;
+    }
+
     run() {}
 }
+
+
+module.exports = Board;
