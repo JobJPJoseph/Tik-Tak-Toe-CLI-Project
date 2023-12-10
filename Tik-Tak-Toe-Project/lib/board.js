@@ -1,4 +1,3 @@
-
 class Board {
     constructor(player = null, cpu = null) {
         this.player = player; // An instance
@@ -23,7 +22,7 @@ class Board {
             return row.join(" | ");
         }).join("\n" + "----------" + "\n");
 
-        return printGrid;
+        return console.log(printGrid);
     }
 
     getCoordinate(input) {
@@ -56,8 +55,16 @@ class Board {
     }
 
     stateOfGame() {
-        if (this.isLose()) return console.log(`You Lose!!!`);
-        if (this.isWin()) return console.log(`You Win!!!`);
+        if (this.isLose()) {
+            console.log(`You Lose!!!`);
+            return true;
+        }
+
+        if (this.isWin()) {
+            console.log(`You Win!!!`);
+            return true;
+        }
+
         return false;
     }
 
@@ -158,7 +165,32 @@ class Board {
         return true;
     }
 
-    run() {}
+    current() {
+        return this.turn[0];
+    }
+
+    async run() {
+        let exit = false;
+        this.print();
+        while(!exit) {
+            let availableCoordintates = this.collectCoordinates();
+            let currentPlayer = this.current();
+            let input = await currentPlayer.askCoordinate(availableCoordintates);
+            this.setCoordinate(input, currentPlayer);
+            this.print();
+            console.log();
+            console.log();
+            console.log();
+            if (this.stateOfGame()) {
+                exit = true;
+            } else {
+                this.rotateTurn();
+            }
+
+        }
+
+        return true;
+    }
 }
 
 
