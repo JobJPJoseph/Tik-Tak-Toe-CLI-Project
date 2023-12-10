@@ -32,7 +32,24 @@ Create a method called `collectCoordinate`. It will iterate through `this.grid` 
 Create a method called `stateOfGame`. The purpose of this method is to call `isLose` and `isWin`. If `isWin` is true, then return`console.log("You Win!!!")`. If lose, then return `console.log("You Lose!!!")`
 
 ## Phase 8
-Create a method called `isLose`. The purpose of this method is to see if `horizontalStreak`, `diagonalStreak`, `acrossTopLeft`, `acrossBottomLeft` have streak of `this.cpu.symbol`. If any them returns true, return true, otherwise return false.
+Create a method called `isLose`. The purpose of this method is to see if `horizontalStreak`, `verticalStreak`, `acrossTopLeft`, `acrossBottomLeft` have streak of `this.cpu.symbol`. If any them returns true, return true, otherwise return false.
 
 ## Phase 9
-Create a method
+Create a method called `isWin`. The puropse of the method is to see if `horizontalStreak`, `verticalStreak`, `acrossTopLeft`, `acrossBottomLeft` have streak of `this.player.symbol`. If any them returns true, return true, otherwise return false.
+
+## Phase 10
+Create a method called `horizontalStreak`. The method accept a single argument named `character`. The purpose of the method is to see if any of the rows in `this.grid` has a streak of `character`. If any of the rows become true, explicitly return true, if all else fails return false.
+
+## Phase 11
+Create a method called `verticalStreak`. The method accept a single argument named `character`. The purpose of the method is to see if any of the cols in `this.grid` has a streak of `character`. If any of the cols become true, explicitly return true, if all else fails return false.
+
+## Phase 12
+Create a method called `acrossTopLeft`. The method accept a single argument named `character`. The purpose of the method is to see if by grabbing a  coordinate form top left to the bottom right and see if it produces a streak. If any of the cols become true, explicitly return true, if all else fails return false.
+`Note`: Make sure to look for any pattern when iterating through `this.grid`
+
+## Phase 13
+Create a method called `acrossBottomLeft`. The method accept a single argument named `character`. The purpose of the method is to see if by grabbing a  coordinate form bottom left to the top right and see if it produces a streak. If any of the cols become true, explicitly return true, if all else fails return false.
+`Note`: Make sure to look for any pattern when iterating through `this.grid`
+
+## Phase 14
+Create a method called `rotateTurn`. This method will reference `this.turn`. The purpose of this method is to replicate a basic rotate method since JavaScript does not have a built-in `.rotate`.
