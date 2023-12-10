@@ -62,7 +62,7 @@ describe('Player', function () {
 
 
 
-            const input = await player.getCoordinate(availableCoordinates);
+            const input = await player.askCoordinate(availableCoordinates);
             expect(input).to.deep.equal([0, 0]); // Use deep.equal for array comparison
         }, 10000);
 

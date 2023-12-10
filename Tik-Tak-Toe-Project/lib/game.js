@@ -1,9 +1,12 @@
 const readline = require('readline');
-const Player = require('./player');
+const Player = require("./player");
+const Cpu = require("./cpu");
+const Board = require("./board");
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+console.log('Welcome to my Tik-Tok-Tow Game!');
 
-const player = new Player(rl);
+const player = new Player(readline);
+const cpu = new Cpu(readline);
+const board = new Board(player, cpu);
+
+board.run();

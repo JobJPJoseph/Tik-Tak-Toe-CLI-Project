@@ -4,7 +4,7 @@ class Player {
         this.symbol = "X";
     }
 
-    getCoordinate(availablePositions) {
+    askCoordinate(availablePositions) {
         return new Promise((resolve) => {
             const rl = this.readline.createInterface({
                 input: process.stdin,

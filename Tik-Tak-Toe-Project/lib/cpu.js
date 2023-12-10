@@ -4,7 +4,7 @@ class Cpu {
         this.symbol = "O";
     }
 
-    getCoordinate(availableCoordinate) {
+    askCoordinate(availableCoordinate) {
         const maxRange = availableCoordinate.length;
         const index = Math.floor(Math.random() * maxRange);
         return availableCoordinate[index];
