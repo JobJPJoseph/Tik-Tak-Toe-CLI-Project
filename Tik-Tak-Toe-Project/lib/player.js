@@ -16,10 +16,7 @@ class Player {
                 rl.question("Enter your coordinate in this form: '0 0': ", (input) => {
                     const arrInput = this.formatCoordinates(input);
 
-                    if (!arrInput) {
-                        console.log('1: Enter a valid coordinate.');
-                        return isInputIncluded();
-                    } else if (!(this.validateCoordinates(availablePositions, arrInput))) {
+                    if(!(arrInput) || !(this.validateCoordinates(availablePositions, arrInput))) {
                         console.log('2: Enter a valid coordinate.');
                         return isInputIncluded();
                     } else {
