@@ -22,7 +22,7 @@ class Board {
             return row.join(" | ");
         }).join("\n" + "----------" + "\n");
 
-        return console.log(printGrid);
+        return printGrid;
     }
 
     getCoordinate(input) {
@@ -65,6 +65,11 @@ class Board {
             return true;
         }
 
+        if (this.isTie()) {
+            console.log("It's a Tie!!!");
+            return true;
+        }
+
         return false;
     }
 
@@ -77,6 +82,40 @@ class Board {
         ];
 
         return isStreak.some((streak) => streak === true);
+    }
+
+    flattenGridRecursive() {
+        const flattenedArray = [];
+
+        function flatten(matrix) {
+          for (let row = 0; row < matrix.length; row++) {
+            for (let col = 0; col < matrix[row].length; col++) {
+              const element = matrix[row][col];
+              if (Array.isArray(element)) {
+                flatten(element);
+              } else {
+                flattenedArray.push(element);
+              }
+            }
+          }
+        }
+
+        flatten(this.grid);
+        return flattenedArray;
+
+    }
+
+    isTie() {
+        let countOfDashes = 0;
+        const possibleDash = this.flattenGridRecursive();
+
+        for (let i = 0; i < possibleDash.length; i++) {
+            const isDash = possibleDash[i];
+
+            if (isDash === "-") countOfDashes++;
+        }
+
+        return countOfDashes === 0;
     }
 
     isWin() {
@@ -169,18 +208,32 @@ class Board {
         return this.turn[0];
     }
 
+    spacingBoard() {
+        for (let i = 0; i < 3; i++) {
+            console.log();
+        }
+
+        return true;
+    }
+
+    async interactWithUser() {
+        let availableCoordintates = this.collectCoordinates();
+        let currentPlayer = this.current();
+        let input = await currentPlayer.askCoordinate(availableCoordintates);
+        this.setCoordinate(input, currentPlayer);
+        console.log(this.print());
+        return true;
+    }
+
     async run() {
         let exit = false;
-        this.print();
+        console.log(this.print());
+
         while(!exit) {
-            let availableCoordintates = this.collectCoordinates();
-            let currentPlayer = this.current();
-            let input = await currentPlayer.askCoordinate(availableCoordintates);
-            this.setCoordinate(input, currentPlayer);
-            this.print();
-            console.log();
-            console.log();
-            console.log();
+            await this.interactWithUser();
+
+            this.spacingBoard();
+
             if (this.stateOfGame()) {
                 exit = true;
             } else {

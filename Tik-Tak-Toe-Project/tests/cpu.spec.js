@@ -10,7 +10,7 @@ describe('Random CPU Coordinate', function () {
                 [1,0], [1,1], [1,2],
                 [2,0], [2,1], [2,2],
             ];
-            const cpuCoordinate = cpu.getCoordinate(availableCoordinates);
+            const cpuCoordinate = cpu.askCoordinate(availableCoordinates);
             const result = availableCoordinates.includes(cpuCoordinate);
             expect(result).to.equal(true);
         })

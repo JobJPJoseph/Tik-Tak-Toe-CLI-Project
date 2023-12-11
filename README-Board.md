@@ -53,3 +53,6 @@ Create a method called `acrossBottomLeft`. The method accept a single argument n
 
 ## Phase 14
 Create a method called `rotateTurn`. This method will reference `this.turn`. The purpose of this method is to replicate a basic rotate method since JavaScript does not have a built-in `.rotate`.
+
+## Phase 15
+Create a method called `current`. The goal here is to return the first index of `this.turn`.
